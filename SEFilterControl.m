@@ -58,9 +58,9 @@
         [gest release];
         
         handler = [[SEFilterKnob buttonWithType:UIButtonTypeCustom] retain];
-        [handler setFrame:CGRectMake(LEFT_OFFSET, 10, 35, 55)];
+        [handler setFrame:CGRectMake(LEFT_OFFSET, 0, 35, 55)];
         [handler setAdjustsImageWhenHighlighted:NO];
-        [handler setCenter:CGPointMake(handler.center.x-(handler.frame.size.width/2.f), self.frame.size.height-19.5f)];
+        [handler setCenter:CGPointMake(handler.center.x-(handler.frame.size.width/2.f), self.frame.size.height/2.f + 5.f)];
         [handler addTarget:self action:@selector(TouchDown:withEvent:) forControlEvents:UIControlEventTouchDown];
         [handler addTarget:self action:@selector(TouchUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
         [handler addTarget:self action:@selector(TouchMove:withEvent:) forControlEvents: UIControlEventTouchDragOutside | UIControlEventTouchDragInside];
@@ -78,10 +78,10 @@
             [lbl setFont:TITLE_FONT];
             [lbl setShadowColor:TITLE_SHADOW_COLOR];
             [lbl setTextColor:TITLE_COLOR];
-            [lbl setLineBreakMode:UILineBreakModeMiddleTruncation];
+            [lbl setLineBreakMode:NSLineBreakByTruncatingMiddle];
             [lbl setAdjustsFontSizeToFitWidth:YES];
-            [lbl setMinimumFontSize:8];
-            [lbl setTextAlignment:UITextAlignmentCenter];
+            [lbl setMinimumScaleFactor:0.5f];
+            [lbl setTextAlignment:NSTextAlignmentCenter];
             [lbl setShadowOffset:CGSizeMake(0, 1)];
             [lbl setBackgroundColor:[UIColor clearColor]];
             [lbl setTag:i+50];
@@ -112,9 +112,9 @@
         [gest release];
         
         handler = [[SEFilterKnob buttonWithType:UIButtonTypeCustom] retain];
-        [handler setFrame:CGRectMake(LEFT_OFFSET, 10, 35, 55)];
+        [handler setFrame:CGRectMake(LEFT_OFFSET, 0, 35, 55)];
         [handler setAdjustsImageWhenHighlighted:NO];
-        [handler setCenter:CGPointMake(handler.center.x-(handler.frame.size.width/2.f), self.frame.size.height-19.5f)];
+        [handler setCenter:CGPointMake(handler.center.x-(handler.frame.size.width/2.f), self.frame.size.height/2.f + 5.f)];
         [handler addTarget:self action:@selector(TouchDown:withEvent:) forControlEvents:UIControlEventTouchDown];
         [handler addTarget:self action:@selector(TouchUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
         [handler addTarget:self action:@selector(TouchMove:withEvent:) forControlEvents: UIControlEventTouchDragOutside | UIControlEventTouchDragInside];
@@ -130,10 +130,10 @@
             lbl = [labels objectAtIndex:i];
             [lbl setFrame:CGRectMake(0, 0, oneSlotSize, 25)];//[[UILabel alloc]initWithFrame:CGRectMake(0, 0, oneSlotSize, 25)];
             //            [lbl setText:title];
-            [lbl setLineBreakMode:UILineBreakModeMiddleTruncation];
+            [lbl setLineBreakMode:NSLineBreakByTruncatingMiddle];
             [lbl setAdjustsFontSizeToFitWidth:YES];
-            [lbl setMinimumFontSize:8];
-            [lbl setTextAlignment:UITextAlignmentCenter];
+            [lbl setMinimumScaleFactor:0.5f];
+            [lbl setTextAlignment:NSTextAlignmentCenter];
             [lbl setShadowOffset:CGSizeMake(0, 0.5)];
             [lbl setBackgroundColor:[UIColor clearColor]];
             [lbl setTag:i+50];
@@ -297,7 +297,7 @@
     toPoint = [self fixFinalPoint:toPoint];
     
     [UIView beginAnimations:nil context:nil];
-    [handler setFrame:CGRectMake(toPoint.x, toPoint.y, handler.frame.size.width, handler.frame.size.height)];
+    [handler setFrame:CGRectMake(toPoint.x - 2, toPoint.y, handler.frame.size.width, handler.frame.size.height)];
     [UIView commitAnimations];
 }
 
@@ -335,13 +335,14 @@
     
     toPoint = [self fixFinalPoint:toPoint];
     
-    [handler setFrame:CGRectMake(toPoint.x, toPoint.y, handler.frame.size.width, handler.frame.size.height)];
+    [handler setFrame:CGRectMake(toPoint.x -2, toPoint.y, handler.frame.size.width, handler.frame.size.height)];
     
     int selected = [self getSelectedTitleInPoint:btn.center];
     
     [self animateTitlesToIndex:selected];
-    
     [self sendActionsForControlEvents:UIControlEventTouchDragInside];
+
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
 }
 
 -(void)dealloc{
