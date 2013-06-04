@@ -121,15 +121,12 @@
         [self addSubview:handler];
         
         int i;
-        NSString *title;
         UILabel *lbl;
         
         oneSlotSize = 1.f*(self.frame.size.width-LEFT_OFFSET-RIGHT_OFFSET-1)/(titlesArr.count-1);
         for (i = 0; i < titlesArr.count; i++) {
-            title = [titlesArr objectAtIndex:i];
             lbl = [labels objectAtIndex:i];
-            [lbl setFrame:CGRectMake(0, 0, oneSlotSize, 25)];//[[UILabel alloc]initWithFrame:CGRectMake(0, 0, oneSlotSize, 25)];
-            //            [lbl setText:title];
+            [lbl setFrame:CGRectMake(0, 0, oneSlotSize, 25)];
             [lbl setLineBreakMode:NSLineBreakByTruncatingMiddle];
             [lbl setAdjustsFontSizeToFitWidth:YES];
             [lbl setMinimumScaleFactor:0.5f];
@@ -145,7 +142,6 @@
             [lbl setCenter:[self getCenterPointForIndex:i]];
             
             [self addSubview:lbl];
-            //            [lbl release];
         }
     }
     return self;
